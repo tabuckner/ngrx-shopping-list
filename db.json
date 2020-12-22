@@ -2,11 +2,15 @@
   "shopping": [
     {
       "id": "2b901b39-7568-4b09-afec-2c286734f6e3",
-      "name": "Lemongrass"
+      "name": "Asstew Grass"
     },
     {
-      "id": "2b901b39-7568-4b09-afec-2c286734f6e3",
-      "name": "Asstew Grass"
+      "id": "625dcc7d-b56f-4cdc-a30c-a6114833f7a6",
+      "name": "asdf"
+    },
+    {
+      "id": "d78997ce-0d5e-4d84-9b98-99d653bb8b65",
+      "name": "asdfasdf"
     }
   ]
 }

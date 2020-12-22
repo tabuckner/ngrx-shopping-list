@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay } from 'rxjs/operators';
+import { delay, switchMap } from 'rxjs/operators';
 import { ShoppingItem } from './store/models/shopping-item.model';
 
 @Injectable({
@@ -15,19 +15,21 @@ export class ShoppingService {
 
   getShoppingItems() {
     return this.http.get<Array<ShoppingItem>>(this.SHOPPING_URL).pipe(
-      delay(500)
+      delay(200)
     );
   }
 
   addShoppingItem(nextShoppingItem: ShoppingItem) {
-    return this.http.post<ShoppingItem>(this.SHOPPING_URL, { ...nextShoppingItem }).pipe(
-      delay(500)
+    return this.http.post<Array<ShoppingItem>>(this.SHOPPING_URL, { ...nextShoppingItem }).pipe(
+      switchMap(() => this.getShoppingItems()),
+      delay(200)
     );
   }
 
   deleteShoppingItem(id: string) {
-    return this.http.delete(`${this.SHOPPING_URL}/${id}`).pipe(
-      delay(500)
+    return this.http.delete<Array<ShoppingItem>>(`${this.SHOPPING_URL}/${id}`).pipe(
+      switchMap(() => this.getShoppingItems()),
+      delay(200)
     );
   }
 }

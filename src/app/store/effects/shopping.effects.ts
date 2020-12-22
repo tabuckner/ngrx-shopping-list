@@ -36,7 +36,7 @@ export class ShoppingEffects {
       ofType(ShoppingActions.deleteShoppingItem),
       switchMap(({ id }) =>
         this.shoppingService.deleteShoppingItem(id).pipe(
-          map(data => ShoppingActions.deleteShoppingItemSuccess({ id })),
+          map(data => ShoppingActions.deleteShoppingItemSuccess({ payload: data })),
           catchError(error => of(ShoppingActions.deleteShoppingItemFailure({ payload: error }))))
       ),
     );

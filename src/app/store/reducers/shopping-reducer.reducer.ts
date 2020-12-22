@@ -33,7 +33,7 @@ export const shoppingReducer = createReducer(
     (state, action) => ({ ...state, loading: true })
   ),
   on(ShoppingActions.addShoppingItemSuccess,
-    (state, action) => ({ ...state, content: [...state.content, action.payload], loading: false })
+    (state, action) => ({ ...state, content: action.payload, loading: false })
   ),
   on(ShoppingActions.addShoppingItemFailure,
     (state, action) => ({ ...state, error: action.payload, loading: false })
@@ -42,7 +42,7 @@ export const shoppingReducer = createReducer(
     (state, action) => ({ ...state, loading: true })
   ),
   on(ShoppingActions.deleteShoppingItemSuccess,
-    (state, action) => ({ ...state, content: state.content.filter(item => item.id !== action.id), loading: false })
+    (state, action) => ({ ...state, content: action.payload, loading: false })
   ),
   on(ShoppingActions.deleteShoppingItemFailure,
     (state, action) => ({ ...state, error: action.payload, loading: false })
