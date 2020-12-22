@@ -25,7 +25,10 @@ export class ShoppingEffects {
       ofType(ShoppingActions.addShoppingItem),
       switchMap(({ payload }) =>
         this.shoppingService.addShoppingItem(payload).pipe(
-          map(data => ShoppingActions.addShoppingItemSuccess({ payload: data })),
+          switchMap(() =>
+            this.shoppingService.getShoppingItems().pipe(
+              map(data => ShoppingActions.loadShoppingItemsSuccess({ payload: data })),
+              catchError(error => of(ShoppingActions.loadShoppingItemsFailure({ payload: error }))))),
           catchError(error => of(ShoppingActions.addShoppingItemFailure({ payload: error }))))
       ),
     );
@@ -36,7 +39,9 @@ export class ShoppingEffects {
       ofType(ShoppingActions.deleteShoppingItem),
       switchMap(({ id }) =>
         this.shoppingService.deleteShoppingItem(id).pipe(
-          map(data => ShoppingActions.deleteShoppingItemSuccess({ id })),
+          switchMap(() => this.shoppingService.getShoppingItems().pipe(
+            map(data => ShoppingActions.loadShoppingItemsSuccess({ payload: data })),
+            catchError(error => of(ShoppingActions.loadShoppingItemsFailure({ payload: error }))))),
           catchError(error => of(ShoppingActions.deleteShoppingItemFailure({ payload: error }))))
       ),
     );
