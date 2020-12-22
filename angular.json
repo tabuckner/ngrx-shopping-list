@@ -123,6 +123,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngrx-shopping-list"
+    }
+  },
+  "defaultProject": "ngrx-shopping-list",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
